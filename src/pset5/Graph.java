@@ -2,6 +2,7 @@ package pset5;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.Stack;
 
 public class Graph
 {
@@ -13,6 +14,8 @@ public class Graph
     {
         numNodes = size;
         // your code goes here // ...
+        // Initialize the matrix of edges
+        edges = new boolean[size][size];
     }
 
     public String toString()
@@ -30,6 +33,42 @@ public class Graph
     {
         // postcondition: adds a directed edge "from" -> "to" to this graph
         // your code goes here //...
+        edges[from][to] = true;
+    }
+
+    /*
+     * Iterate over the graph using depth first search
+     */
+    private boolean isReachable(int source, int target)
+    {
+        /**
+         * TODO: Complete implementation
+         */
+        Stack<Integer> s = new Stack<>();
+        s.push(source);
+        while(s.empty() == false)
+        {
+            /**
+             * TODO: check if this should be peek or pop
+             */
+            int curr = s.pop();
+            if(curr == target)
+            {
+                // Found the target
+                return true;
+            }
+            for (int j = 0; j < numNodes; j++)
+            {
+                // Add all nodes reachable from the current node
+                if(edges[curr][j] == true)
+                {
+                    s.push(j);
+                }
+            }
+        }
+        // Finished iterating over the graph
+        // Did not find a path from source to target
+        return false;
     }
 
     public boolean reachable(Set<Integer> sources, Set<Integer> targets)
@@ -38,8 +77,35 @@ public class Graph
         // postcondition: returns true if
         // (1) "sources" does not contain an illegal node,
         // (2) "targets" does not contain an illegal node, and
-        // (3) for each node "m" in set "targets", there is some // node "n" in set "sources" such that there is a directed // path that starts at "n" and ends at "m" in "this"; and // false otherwise
+        // (3) for each node "m" in set "targets", there is some
+        // node "n" in set "sources" such that there is a directed
+        // path that starts at "n" and ends at "m" in "this"; and
+        // false otherwise
         // your code goes here //...
-        return false;
+
+        /*
+         * TODO: check for illegal nodes
+         */
+        for (int target: targets)
+        {
+            boolean isReachable = false;
+            for (int source : sources)
+            {
+                boolean foundPath = isReachable(source,target);
+                if(foundPath == true)
+                {
+                    // Found a directed path from source to the target
+                    isReachable = true;
+                    break;
+                }
+            }
+            if(isReachable == false)
+            {
+                // Searched all the sources and did not find a path to the target.
+                return false;
+            }
+
+        }
+        return true;
     }
 }
