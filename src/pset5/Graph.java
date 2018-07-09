@@ -29,10 +29,28 @@ public class Graph
         return toString().equals(o.toString());
     }
 
+    private boolean isIllegalNode(int node)
+    {
+        /*
+         * Node must be in the range [0,numNodes-1]
+         */
+        if(node < 0 || numNodes <= node)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void addEdge(int from, int to)
     {
         // postcondition: adds a directed edge "from" -> "to" to this graph
         // your code goes here //...
+
+        // Ignore illegal nodes
+        if(isIllegalNode(from) || isIllegalNode(to))
+        {
+            return;
+        }
         edges[from][to] = true;
     }
 
@@ -41,9 +59,10 @@ public class Graph
      */
     private boolean isReachable(int source, int target)
     {
-        /**
-         * TODO: Complete implementation
-         */
+        if(source == target)
+        {
+            return true;
+        }
         Stack<Integer> s = new Stack<>();
         s.push(source);
         while(s.empty() == false)
@@ -83,14 +102,20 @@ public class Graph
         // false otherwise
         // your code goes here //...
 
-        /*
-         * TODO: check for illegal nodes
-         */
         for (int target: targets)
         {
+            if(isIllegalNode(target))
+            {
+                return false;
+            }
             boolean isReachable = false;
             for (int source : sources)
             {
+                if(isIllegalNode(source))
+                {
+                    return false;
+                }
+
                 boolean foundPath = isReachable(source,target);
                 if(foundPath == true)
                 {
