@@ -9,7 +9,9 @@ public class Graph
     private int numNodes; // number of nodes in the graph
     private boolean[][] edges; // edges[i][j] is true if and only if there is an edge from node i to node j
 
-    // class invariant: fields "edges" is non-null; // "edges" is a square matrix; // numNodes is number of rows in "edges"
+    // class invariant: fields "edges" is non-null;
+    // "edges" is a square matrix;
+    // numNodes is number of rows in "edges"
     public Graph(int size)
     {
         numNodes = size;
@@ -34,7 +36,10 @@ public class Graph
         /*
          * Node must be in the range [0,numNodes-1]
          */
-        if(node < 0 || numNodes <= node)
+        if( node < 0 )
+        {
+            return true;
+        }else if( numNodes <= node )
         {
             return true;
         }
@@ -47,7 +52,11 @@ public class Graph
         // your code goes here //...
 
         // Ignore illegal nodes
-        if(isIllegalNode(from) || isIllegalNode(to))
+        if( isIllegalNode(from) )
+        {
+            return;
+        }
+        if( isIllegalNode(to) )
         {
             return;
         }
