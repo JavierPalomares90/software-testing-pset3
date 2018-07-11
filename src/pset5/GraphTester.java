@@ -29,8 +29,7 @@ public class GraphTester
     // no test method directly invokes any method that is not
     // declared in the Graph class as given in this homework
 
-    // Tests for adding from an illegal node to a valid one
-
+    // Test for adding from an illegal node to a valid one
     // Node is illegal if its value is >= to value passed into the constructor
     @Test
     public void tae1()
@@ -41,43 +40,14 @@ public class GraphTester
         assertEquals(g.toString(), "numNodes: 2\nedges: [[false, false], [false, false]]");
     }
 
-    // Node is illegal if its value is negative
+
+    // Tests for adding from an valid node to an illegal one
+    // Node is illegal if its value is <0
     @Test
     public void tae2()
     {
         Graph g = new Graph(2);
-        g.addEdge(-1, 0);
-        System.out.println(g);
-        assertEquals(g.toString(), "numNodes: 2\nedges: [[false, false], [false, false]]");
-    }
-
-    // Tests for adding from an valid node to an illegal one
-
-    // Node is illegal if its value is >= to value passed into the constructor
-    @Test
-    public void tae3()
-    {
-        Graph g = new Graph(2);
-        g.addEdge(0, 2);
-        System.out.println(g);
-        assertEquals(g.toString(), "numNodes: 2\nedges: [[false, false], [false, false]]");
-    }
-
-    // Node is illegal if its value is negative
-    @Test
-    public void tae4()
-    {
-        Graph g = new Graph(2);
         g.addEdge(0, -1);
-        System.out.println(g);
-        assertEquals(g.toString(), "numNodes: 2\nedges: [[false, false], [false, false]]");
-    }
-    // Test adding from a illegal node to an illegal one
-    @Test
-    public void tae5()
-    {
-        Graph g = new Graph(2);
-        g.addEdge(2, 3);
         System.out.println(g);
         assertEquals(g.toString(), "numNodes: 2\nedges: [[false, false], [false, false]]");
     }
