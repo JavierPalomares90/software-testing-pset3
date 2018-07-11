@@ -85,6 +85,7 @@ public class GraphTester
         Graph g = new Graph(3);
         g.addEdge(0,1);
         g.addEdge(1,2);
+        // 4 is an illegal node
         g.addEdge(4,4);
         assertEquals(g.toString(), "numNodes: 3\nedges: [[false, true, false], [false, false, true], [false, false, false]]");
     }
@@ -97,6 +98,7 @@ public class GraphTester
         Graph g = new Graph(3);
         g.addEdge(0,1);
         g.addEdge(0,2);
+        // -4 and -2 are illegal nodes
         g.addEdge(-4,-2);
         assertEquals(g.toString(), "numNodes: 3\nedges: [[false, true, true], [false, false, false], [false, false, false]]");
     }
@@ -121,4 +123,34 @@ public class GraphTester
     // no test method directly invokes any method that is not
     // declared in the Graph class as given in this homework
     // ...
+
+    @Test
+    public void tr1()
+    {
+    }
+
+    @Test
+    public void tr2()
+    {
+    }
+
+    @Test
+    public void tr3()
+    {
+    }
+
+    @Test
+    public void tr4()
+    {
+    }
+
+    @Test
+    public void tr5()
+    {
+    }
+
+    @Test
+    public void tr6()
+    {
+    }
 }
