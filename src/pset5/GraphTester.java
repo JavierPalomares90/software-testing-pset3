@@ -2,6 +2,7 @@ package pset5;
 
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
 import java.util.TreeSet;
 import java.util.Set;
 
@@ -104,11 +105,12 @@ public class GraphTester
     }
     // ...
     // tests for method "reachable" in class "Graph"
+    // Assert that a node is reachable from itself
     @Test
     public void tr0()
     {
         Graph g = new Graph(1);
-        Set<Integer> nodes = new TreeSet<Integer>();
+        Set<Integer> nodes = new TreeSet<>();
         nodes.add(0);
         assertTrue(g.reachable(nodes, nodes));
     }
@@ -124,24 +126,56 @@ public class GraphTester
     // declared in the Graph class as given in this homework
     // ...
 
-    @Test
+    // Assert that an assertion is thrown if sources is null
+    @Test(expected = IllegalArgumentException.class)
     public void tr1()
     {
+        Graph g = new Graph(1);
+        Set<Integer> nodes = new TreeSet<>();
+        nodes.add(0);
+        assertFalse(g.reachable(null,nodes));
     }
 
-    @Test
+    // Assert that an assertion is thrown if targets is null
+    @Test(expected = IllegalArgumentException.class)
     public void tr2()
     {
+        Graph g = new Graph(1);
+        Set<Integer> nodes = new TreeSet<>();
+        nodes.add(0);
+        assertFalse(g.reachable(nodes,null));
     }
 
+    // Add edge 0->1 then assert 1 is reachable from 0
     @Test
     public void tr3()
     {
+        Graph g = new Graph(2);
+        g.addEdge(0,1);
+        Set<Integer> sources = new TreeSet<>();
+        sources.add(0);
+        Set<Integer> targets = new TreeSet<>();
+        targets.add(1);
+        assertTrue(g.reachable(sources,targets));
     }
 
     @Test
+    // Add edge 0->1, 0->2, 1->2 then assert a target set including 3 is not reachable from sources {0,1,2}
     public void tr4()
     {
+        Graph g = new Graph(4);
+        g.addEdge(0,1);
+        g.addEdge(0,2);
+        g.addEdge(1,2);
+        Set<Integer> sources = new TreeSet<>();
+        sources.add(0);
+        sources.add(1);
+        sources.add(2);
+        Set<Integer> targets = new TreeSet<>();
+        targets.add(1);
+        targets.add(2);
+        targets.add(3);
+        assertFalse(g.reachable(sources,targets));
     }
 
     @Test
