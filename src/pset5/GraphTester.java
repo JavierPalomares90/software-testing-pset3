@@ -45,11 +45,11 @@ public class GraphTester
     public void tae2()
     {
         Graph g = new Graph(2);
-        g.addEdge(0,1);
+        g.addEdge(1,1);
         // 2 is an illegal node
         g.addEdge(2, 0);
         System.out.println(g);
-        assertEquals(g.toString(), "numNodes: 2\nedges: [[false, true], [false, false]]");
+        assertEquals(g.toString(), "numNodes: 2\nedges: [[false, false], [false, true]]");
     }
 
     // Tests for adding from an valid node to an illegal one
