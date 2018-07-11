@@ -30,28 +30,75 @@ public class GraphTester
     // declared in the Graph class as given in this homework
 
     // Test for adding from an illegal node to a valid one
-    // Node is illegal if its value is >= to value passed into the constructor
+    // Node is illegal if its value is <0
     @Test
     public void tae1()
     {
         Graph g = new Graph(2);
-        g.addEdge(2, 0);
+        g.addEdge(-1, 0);
         System.out.println(g);
         assertEquals(g.toString(), "numNodes: 2\nedges: [[false, false], [false, false]]");
     }
 
-
-    // Tests for adding from an valid node to an illegal one
-    // Node is illegal if its value is <0
+    // Node is illegal if its value is >= the size of the graph
     @Test
     public void tae2()
     {
         Graph g = new Graph(2);
-        g.addEdge(0, -1);
+        g.addEdge(0,1);
+        // 2 is an illegal node
+        g.addEdge(2, 0);
         System.out.println(g);
-        assertEquals(g.toString(), "numNodes: 2\nedges: [[false, false], [false, false]]");
+        assertEquals(g.toString(), "numNodes: 2\nedges: [[false, true], [false, false]]");
     }
 
+    // Tests for adding from an valid node to an illegal one
+    // Node is illegal if its value is <0
+    @Test
+    public void tae3()
+    {
+        Graph g = new Graph(3);
+        g.addEdge(0, -1);
+        System.out.println(g);
+        assertEquals(g.toString(), "numNodes: 3\nedges: [[false, false, false], [false, false, false], [false, false, false]]");
+    }
+
+    // Node is illegal if its value is >= the size of the graph
+    @Test
+    public void tae4()
+    {
+        Graph g = new Graph(4);
+        g.addEdge(0,1);
+        g.addEdge(1,3);
+        // 5 is an illegal node
+        g.addEdge(0, 5);
+        System.out.println(g);
+        assertEquals(g.toString(), "numNodes: 4\nedges: [[false, true, false, false], [false, false, false, true], [false, false, false, false], [false, false, false, false]]");
+    }
+
+    // Tests for adding from an illegal node to an illegal one
+    // Node is illegal if its value is <0
+    @Test
+    public void tae5()
+    {
+        Graph g = new Graph(3);
+        g.addEdge(0,1);
+        g.addEdge(1,2);
+        g.addEdge(4,4);
+        assertEquals(g.toString(), "numNodes: 3\nedges: [[false, true, false], [false, false, true], [false, false, false]]");
+    }
+
+    // Tests for adding from an illegal node to an illegal one
+    // Node is illegal if its value is <0
+    @Test
+    public void tae6()
+    {
+        Graph g = new Graph(3);
+        g.addEdge(0,1);
+        g.addEdge(0,2);
+        g.addEdge(-4,-2);
+        assertEquals(g.toString(), "numNodes: 3\nedges: [[false, true, true], [false, false, false], [false, false, false]]");
+    }
     // ...
     // tests for method "reachable" in class "Graph"
     @Test

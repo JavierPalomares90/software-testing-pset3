@@ -15,7 +15,8 @@ public class Graph
     public Graph(int size)
     {
         numNodes = size;
-        // your code goes here // ...
+        // your code goes here
+        // ...
         // Initialize the matrix of edges
         edges = new boolean[size][size];
     }
@@ -49,7 +50,8 @@ public class Graph
     public void addEdge(int from, int to)
     {
         // postcondition: adds a directed edge "from" -> "to" to this graph
-        // your code goes here //...
+        // your code goes here
+        // ...
 
         // Ignore illegal nodes
         if( isIllegalNode(from) )
