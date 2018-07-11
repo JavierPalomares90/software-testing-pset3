@@ -159,8 +159,8 @@ public class GraphTester
         assertTrue(g.reachable(sources,targets));
     }
 
-    @Test
     // Add edge 0->1, 0->2, 1->2 then assert a target set including 3 is not reachable from sources {0,1,2}
+    @Test
     public void tr4()
     {
         Graph g = new Graph(4);
@@ -178,13 +178,42 @@ public class GraphTester
         assertFalse(g.reachable(sources,targets));
     }
 
+    // Assert reachable returns false when source set contains any illegal node
     @Test
     public void tr5()
     {
+        Graph g = new Graph(5);
+        g.addEdge(0,3);
+        g.addEdge(0,4);
+        g.addEdge(1,3);
+        Set<Integer> sources = new TreeSet<>();
+        sources.add(0);
+        sources.add(1);
+        sources.add(2);
+        sources.add(-1);
+        sources.add(10);
+        Set<Integer> targets = new TreeSet<>();
+        targets.add(4);
+        targets.add(3);
+        assertFalse(g.reachable(sources,targets));
     }
 
+    // Assert reachable returns false when target set contains an illegal node
     @Test
     public void tr6()
     {
+        Graph g = new Graph(3);
+        g.addEdge(0,3);
+        g.addEdge(0,2);
+        g.addEdge(1,3);
+        Set<Integer> sources = new TreeSet<>();
+        sources.add(0);
+        sources.add(1);
+        sources.add(2);
+        Set<Integer> targets = new TreeSet<>();
+        targets.add(2);
+        targets.add(3);
+        targets.add(4);
+        assertFalse(g.reachable(sources,targets));
     }
 }
