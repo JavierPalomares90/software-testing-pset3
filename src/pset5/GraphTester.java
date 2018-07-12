@@ -216,4 +216,27 @@ public class GraphTester
         targets.add(4);
         assertFalse(g.reachable(sources,targets));
     }
+
+    // Assert subsets and disjoint sets from the set of edge sources are targets are reachable
+    @Test
+    public void tr7()
+    {
+        Graph g = new Graph(4);
+        g.addEdge(0,3);
+        g.addEdge(0,2);
+        g.addEdge(1,0);
+        g.addEdge(2,2);
+        Set<Integer> sources = new TreeSet<>();
+        sources.add(0);
+        sources.add(1);
+        sources.add(2);
+        sources.add(3);
+
+        Set<Integer> targets = new TreeSet<>();
+        targets.add(0);
+        targets.add(2);
+        targets.add(3);
+        assertTrue(g.reachable(sources,targets));
+    }
+
 }
