@@ -78,9 +78,6 @@ public class Graph
         s.push(source);
         while(s.empty() == false)
         {
-            /**
-             * TODO: check if this should be peek or pop
-             */
             int curr = s.pop();
             if(curr == target)
             {
