@@ -1,13 +1,14 @@
 package pset5;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 
 public class Graph
 {
     private int numNodes; // number of nodes in the graph
-    private boolean[][] edges; // edges[i][j] is true if and only if there is an edge from node i to node j
+    protected boolean[][] edges; // edges[i][j] is true if and only if there is an edge from node i to node j
 
     // class invariant: fields "edges" is non-null;
     // "edges" is a square matrix;
@@ -76,6 +77,7 @@ public class Graph
         }
         Stack<Integer> s = new Stack<>();
         s.push(source);
+        Set<Integer> set = new HashSet<>();
         while(s.empty() == false)
         {
             int curr = s.pop();
@@ -84,11 +86,19 @@ public class Graph
                 // Found the target
                 return true;
             }
+            if(set.contains(curr))
+            {
+                // If we have already seen this node, move on
+                continue;
+            }
+            set.add(curr);
             for (int j = 0; j < numNodes; j++)
             {
                 // Add all nodes reachable from the current node
                 if(edges[curr][j] == true)
                 {
+
+
                     s.push(j);
                 }
             }
